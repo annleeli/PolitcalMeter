@@ -10,27 +10,83 @@
 //   $routeProvider.otherwise({redirectTo: '/view1'});
 // }]);
 
-function Ctrl($scope) {
-    // var indico = require("indico.io");
-    var apiKey = "78f0b703f174e46a4a0afca0c782c263";
-    
+var myApp = angular.module('myApp',[]);
+
+
+myApp.controller('ctrl', ['$scope', '$timeout', "$q", "$http" ,function ($scope, $timeout, $q, $http) {
     $scope.searchText = "";
     
-    $scope.submitSearch = function() {
-        // single example
+    $scope.sentiment = 0;
+    $scope.political = {};
+    $scope.keywords = "";
+    
+    var i =0;
+    
+    function indico(method) {
+        return 'https://apiv2.indico.io/' + method + '?key=78f0b703f174e46a4a0afca0c782c263'
+    }
+    
+    function getSentiment () {
+        var deferred = $q.defer();
         $.post(
-          'https://apiv2.indico.io/sentiment?key=78f0b703f174e46a4a0afca0c782c263',
+          indico("sentiment"),
           JSON.stringify({
             'data': $scope.searchText
           })
-        ).then(function(res) { console.log("sentiment", res) });
+        ).then(function(res) { 
+            
+            $scope.$apply(function(){
+                deferred.resolve(res)
+            })
+            
+            return deferred.promise;
+        })
+    }
+    
+    $scope.submitSearch = function() {
+    
+        $.post(
+          indico("sentiment"),
+          JSON.stringify({
+            'data': $scope.searchText
+          })
+        ).then(function(res) {
+            res = JSON.parse(res);
+            console.log("sentiment",res) 
+            $scope.sentiment = res;
+        }).then(function() {
+            $scope.$apply();
+        });
+        
         
         $.post(
-          'https://apiv2.indico.io/political?key=78f0b703f174e46a4a0afca0c782c263',
+          indico("political"),
           JSON.stringify({
             'data': $scope.searchText
           })
-        ).then(function(res) { console.log("political",res) });
+        ).then(function(res) {
+            res = JSON.parse(res);
+            console.log("political",res) 
+            $scope.political = res;
+        }).then(function() {
+            $scope.$apply();
+        });
+        
+        $.post(
+          indico("keywords"),
+          JSON.stringify({
+            'data': $scope.searchText
+          })
+        ).then(function(res) {
+            res = JSON.parse(res);
+            console.log("keywords",res) 
+            $scope.keywords = res;
+        }).then(function() {
+            $scope.$apply();
+        });
+        
+        
+        
         
         // // batch example
         // $.post(
@@ -43,30 +99,5 @@ function Ctrl($scope) {
         //   })
         // ).then(function(res) { console.log(res) });
     }
+}]);
     
-    
-    
-   
-
-    
-//   $scope.items = [{'type' : 'settings'}, {'type':'home'}, {'type':'other'}];
-//   $scope.selection = $scope.items[0];
-  
-//   $scope.options = [
-//     {'title' : 'Title1', 'label' : 'Zip code', 'type' : 'xxx' },
-//     {'title' : 'Title2', 'label' : 'MD', 'type' : 'title1'},
-//     {'title' : 'Title3', 'label' : 'DMS', 'type' : 'title2'}
-// ];
-  
-//   $scope.test = '';
-//   $scope.searchType = $scope.options[0];
-  
-//   $scope.selectSearchType = function(op){
-//     $scope.searchType = op;
-//   };
-  
-//   $scope.actionme = function(){
-//     console.log('value is:' + $scope.test);
-//     //alert($scope.test);
-//   };
-}
