@@ -21,8 +21,10 @@
   "homepage": "https://github.com/annleeli/PolitcalMeter#readme",
   "dependencies": {
     "angular": "^1.5.0",
+    "angular-chart.js": "^0.8.8",
     "gulp": "^3.9.1",
-    "indico.io": "^0.7.0"
+    "indico.io": "^0.7.0",
+    "lazy.js": "^0.4.2"
   },
   "devDependencies": {
     "gulp-less": "^3.0.5"
