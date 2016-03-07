@@ -3,6 +3,8 @@ body {
     text-align: center;
     font-family: 'Patua One';
     font-size: 32px;
+    background: url("flag.jpg") no-repeat center fixed;
+    background-size: auto 110%;
 }
 
 data {
@@ -23,12 +25,11 @@ data {
 }
 
 #header {
-    background-image: 
-    url("flag.jpg");
+    /*background-image: url("flag.jpg");*/
     /* http://www.euclidlibrary.org/images/tickle-your-brain/o-american-flag-facebook.jpg?sfvrsn=0*/
     position: fixed;
-    background-size: 110vw auto;
-    background-repeat: no-repeat;
+    /*background-size: 110vw auto;*/
+    /*background-repeat: no-repeat;*/
     width: 100%;
     height: 120vh;
     position: fixed;
