@@ -3,8 +3,11 @@ body {
     text-align: center;
     font-family: 'Patua One';
     font-size: 32px;
-    background: url("flag.jpg") no-repeat center fixed;
-    background-size: auto 110%;
+    background: url("flag.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 data {
