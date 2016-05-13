@@ -37,7 +37,8 @@ myApp.controller('ctrl', ['$scope', '$timeout', "searchResults" ,function ($scop
     $scope.sentimentDisplayStyle = "";
     $scope.perOptions = {
         angleLineColor: "rgba(f, f, f,1)",
-        pointLabelFontColor: "rgba(f, f, f, 1)"
+        pointLabelFontColor: "rgba(f, f, f, 1)",
+        scaleLineColor: "rgba(f, f, f, .5)"
     }
     
     $scope.database = 
